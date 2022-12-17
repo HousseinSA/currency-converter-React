@@ -1,0 +1,48 @@
+body {
+  background: rgb(53, 110, 110);
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  text-transform: capitalize;
+  line-height: 1.2;
+}
+.converter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+h1 {
+  color: aliceblue;
+  font-weight: bold;
+}
+#equal {
+  text-align: center;
+  margin-right: 2rem;
+  width: 3rem;
+
+  font-size: 2rem;
+  color: antiquewhite;
+}
+.input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20rem;
+}
+input {
+  padding: 0.4rem 0.2rem;
+  width: 15rem;
+  display: inline-block;
+}
+.input select {
+  padding: 0.4rem;
+  margin-left: 1rem;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+.input select,
+input:focus {
+  outline: none;
+}
