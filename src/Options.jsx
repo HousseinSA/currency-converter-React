@@ -1,7 +1,6 @@
 import React from "react"
 
 export default function Options({
-  handelSumbit,
   currency,
   selecetedCorrency,
   handelChange,
@@ -9,14 +8,14 @@ export default function Options({
   handelAmount,
 }) {
   return (
-    <form onSubmit={(e) => handelSumbit(e)}>
+    <form onSubmit={(e) => e.preventDefault()}>
       <div className="input">
         <input type="number" onChange={handelAmount} value={amount} />
         <select value={selecetedCorrency} onChange={handelChange}>
-          {currency.map((currency, index) => {
+          {currency.map((curr, index) => {
             return (
-              <option key={index} value={currency}>
-                {currency}
+              <option key={index} value={curr.code}>
+                {curr.description}
               </option>
             )
           })}

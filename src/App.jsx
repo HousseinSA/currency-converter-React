@@ -2,11 +2,8 @@ import "./index.css"
 import { useEffect, useState } from "react"
 import Options from "./Options"
 import axios from "axios"
-
+// home function and and making and the making of all the componenets.
 function App() {
-  function handelSumbit(e) {
-    e.preventDefault()
-  }
   const [currency, setCurrency] = useState([])
   const [fromcurrency, setFromCurrency] = useState()
   const [toCurrency, setTocurrency] = useState()
@@ -25,16 +22,15 @@ function App() {
   // first render fetch the api and changing states
   useEffect(() => {
     axios("https://api.exchangerate.host/latest").then((res) => {
-      // getting the default the fist curruncy on array
-      const toCurr = Object.keys(res.data.rates)[0]
-      // set from to the base curruncy
-      setFromCurrency(res.data.base)
-      // the currency array list
-      setCurrency([res.data.base, ...Object.keys(res.data.rates)])
-      // the second currency input
-      setTocurrency(toCurr)
-      // the exchange rates amount
+      // set exchangerates value on default
       setExchangeRate(res.data.rates[toCurrency])
+    })
+  })
+  useEffect(() => {
+    axios("https://api.exchangerate.host/symbols").then((res) => {
+      setCurrency(Object.values(res.data.symbols))
+      setFromCurrency(Object.values(res.data.symbols)[0].code)
+      setTocurrency(Object.values(res.data.symbols)[1].code)
     })
   }, [])
   // function for changing the amount and the changed input
@@ -61,7 +57,6 @@ function App() {
     <div className="converter">
       <h1>corrency converter</h1>
       <Options
-        handelSumbit={handelSumbit}
         currency={currency}
         selecetedCorrency={fromcurrency}
         handelChange={(e) => setFromCurrency(e.target.value)}
@@ -70,11 +65,11 @@ function App() {
       />
       <div id="equal">=</div>
       <Options
-        handelSumbit={handelSumbit}
         currency={currency}
         selecetedCorrency={toCurrency}
         handelChange={(e) => setTocurrency(e.target.value)}
         amount={toAmount}
+        // handel to amount when changes 
         handelAmount={handelToAmountChange}
       />
     </div>
